@@ -11,8 +11,11 @@ def get_fruityvice_data(this_fruit_choice):
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
   
-
-  
+def insert_row_snowflake(new_fruit):
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
+    return "Thanks for adding " + new_fruit
+    
   
 
 
@@ -62,6 +65,8 @@ except URLError as e:
   streamlit.error()
 
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
-
-#my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
-streamlit.write('Thanks for adding ', add_my_fruit)
+if streamlit.button("Add Fruit to the List"):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  back_from_function = insert_row_snowflake(add_my_fruit)
+  streamlit.text(back_from_function)
+  
