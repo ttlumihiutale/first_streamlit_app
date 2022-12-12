@@ -20,7 +20,6 @@ streamlit.text('Avocado Toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -44,4 +43,6 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 streamlit.dataframe(fruityvice_normalized)
 
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
+
+my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
 streamlit.write('Thanks for adding ', add_my_fruit)
