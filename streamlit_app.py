@@ -63,5 +63,5 @@ except URLError as e:
 
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
 
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
+#my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('fromstreamlit')")
 streamlit.write('Thanks for adding ', add_my_fruit)
